@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body{
+            font-size: 13px;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: white;
+            color: black;
+        }
+        .bg-tim{
+            background-color: #5867DD;
+        }
+        .bg-vang{
+            background-color: #FFB822;
+        }
+        .bg-do{
+            background-color: #FF0000;
+        }
+        .text-center{
+            text-align: center;
+        }
+        .text-left{
+            text-align: left;
+        }
+        .text-mg{
+            margin: auto 0;
+        }
+        select:required:invalid{
+            color: #6C757D;
+        }
+        .form-check{
+            font-size: 16px;
+        }
+        .form-check input{
+            width: 22px;
+            height: 22px;
+        }
+        .form-check label{
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+    <div class="container" ng-controller="myCtrl">
+        <form action="" name="myForm">
+            <div class="row w-100">
+                <div class="col-lg-12 text-center mb-2 mt-2">
+                    <h3 class="fw-bold text-danger text-mg">ĐĂNG KÝ XÉT TUYỂN ONLINE</h3>
+                </div>
+            </div>
+
+            <div class="row bg-tim w-100">
+                <div class="col-lg-12 text-center pt-1 pb-1">
+                    <h3 class="text-light text-mg">THÔNG TIN THÍ SINH</h3>
+                </div>
+            </div>
+
+            <div class="row mt-2 w-100">
+                <div class="col-lg-2">
+                    <label>Họ đệm<span class="text-danger">(*)</span></label>
+                    <input type="" name="txthodem"v ng-model="hodem" class="form-control" placeholder="Nhập họ đệm" required>
+                    <div ng-hide="myForm.txthodem.$valid" style="color: red;">Vui lòng nhập họ đệm</div>
+                </div>
+
+                <div class="col-lg-2">
+                    <label>Tên<span class="text-danger">(*)</span></label>
+                    <input type="text" name="txtten" ng-model="ten" class="form-control" placeholder="Nhập tên" required>
+                    <div ng-hide="myForm.txtten.$valid" style="color: red;">Vui lòng nhập tên</div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label>Gới tính<span class="text-danger">(*)</span></label> <br>
+                    <select class="btn text-left form-control" name="txtgioitinh" ng-model="gioitinh" style="border:1px solid #ccc" required>
+                        <option value="" disabled selected>Chọn giới tính</option>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                    <div ng-hide="myForm.txtgioitinh.$valid" style="color: red;">Vui lòng chọn giới tính</div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label>Ngày sinh<span class="text-danger">(*)</span></label>
+                    <input type="date" name="txtngaysinh" ng-model="ngaysinh" id="" class="form-control" placeholder="DD/MM/YYYY" required>
+                    <div ng-hide="myForm.txtngaysinh.$valid" style="color: red;">Vui lòng nhập ngày sinh</div>
+                </div> 
+            </div>
+            <div class="row w-100 mt-2">
+                <div class="col-lg-4">
+                    <label>Nơi sinh<span class="text-danger">(*)</span></label> <br>
+                    <select class="btn text-left form-control" name="txtnoisinh" ng-model="noisinh" style="border:1px solid #ccc" required>
+                        <option value="" disabled selected>Chọn nơi sinh</option>
+                        <option ng-repeat="x in tinh" value="{{x}}">{{x}}</option>
+                    </select>
+                    <div ng-hide="myForm.txtnoisinh.$valid" style="color: red;">Vui lòng chọn nơi sinh</div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label>Số CMND/ Căn cước CD<span class="text-danger">(*)</span></label> <br>
+                    <input type="text" name="txtcmt" ng-model="cmt" class="form-control" placeholder="Nhập CMND/CCCD" required>
+                    <div ng-hide="myForm.txtcmt.$valid" style="color: red;">Vui lòng nhập CMND/CCCD</div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label>Ngày cấp<span class="text-danger">(*)</span></label>
+                    <input type="date" name="txtngaycap" ng-model="ngaycap" id="" class="form-control" placeholder="DD/MM/YYYY" required>
+                    <div ng-hide="myForm.txtngaycap.$valid" style="color: red;">Vui lòng nhập ngày cấp</div>
+                </div> 
+            </div>
+            <div class="row w-100 mt-2">
+                <div class="col-lg-8">
+                    <label>Nơi cấp CMND/CCCD<span class="text-danger">(*)</span></label>
+                    <input type="text" name="txtnoicap" ng-model="noicap" class="form-control" placeholder="Nhập nơi cấp CMND/CCCD (Nếu CCCD: ghi CỤC TRƯỞNG CỤC CẢNH SÁT)" required>
+                    <div ng-hide="myForm.txtnoicap.$valid" style="color: red;">Vui lòng nhập nơi cấp</div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label>Email<span class="text-danger">(*)</span></label>
+                    <input type="email" name="txtemail" ng-model="email" class="form-control" placeholder="Nhập email" required>
+                    <div ng-hide="myForm.txtemail.$valid" style="color: red;">Vui lòng nhập email</div>
+                </div>
+            </div>
+            <div class="row w-100 mt-2">
+                <div class="col-lg-4">
+                    <label>Tỉnh/Thành phố<span class="text-danger">(*)</span></label>
+                    <select class="btn text-left form-control" name="txttinhthanh" ng-model="tinhthanh" style="border:1px solid #ccc" required>
+                        <option value="" disabled selected>Chọn tỉnh/thành phố</option>
+                        <option ng-repeat="x in tinh" value="{{x}}">{{x}}</option>
+                    </select>
+                    <div ng-hide="myForm.txttinhthanh.$valid" style="color: red;">Vui lòng chọn tỉnh/thành phố</div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label>Quận/Huyện<span class="text-danger">(*)</span></label>
+                    <select class="btn text-left form-control" name="txthuyen" ng-click="chonhuyen()" ng-model="huyen" style="border:1px solid #ccc" required>
+                        <option value="" disabled selected>Chọn quận/huyện</option>
+                        <option ng-repeat="x in quanhuyen" value="{{x}}">{{x}}</option>
+                    </select>
+                    <div ng-hide="myForm.txthuyen.$valid" style="color: red;">Vui lòng chọn quận/huyện</div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label>Phường/Xã<span class="text-danger">(*)</span></label>
+                    <select class="btn text-left form-control" name="txtxa" ng-model="xa" style="border:1px solid  #ccc" ng-click="chonxa()" required>
+                        <option value="" disabled selected>Chọn phường/xã</option>
+                        <option ng-repeat="x in phuongxa" value="{{x}}">{{x}}</option>
+                    </select>
+                    <div ng-hide="myForm.txtxa.$valid" style="color: red;">Vui lòng chọn phường/xã</div>
+                </div>
+            </div>
+            <div class="row mt-2 mb-2 w-100">
+                <div class="col-lg-8">
+                    <label>Địa chỉ (Thí sinh ghi rõ: số nhà, đường, Phường/ Xã, Quận/ Huyện, Tỉnh / Thành phố)<span class="text-danger">(*)</span></label>
+                    <input type="text" name="txtdiachi" ng-model="diachi" class="form-control" placeholder="Nhập địa chỉ" required>
+                    <div ng-hide="myForm.txtdiachi.$valid" style="color: red;">Vui lòng nhập địa chỉ</div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label>Điện thoại<span class="text-danger">(*)</span></label>
+                    <input type="text" name="txtsdt" ng-model="sdt" class="form-control" placeholder="Nhập số điện thoại" required>
+                    <div ng-hide="myForm.txtsdt.$valid" style="color: red;">Vui lòng nhập số điện thoại</div>
+                </div>
+            </div>
+
+            <b class="mt-">Lưu ý: thí sinh ghi đầy đủ những mục có <span style="color: red;">(*)</span></b>
+
+            <div class="row mt-2 bg-vang w-100">
+                <div class="col-lg-12 text-center pt-1 pb-1">
+                    <h3 class="text-light text-mg">THÔNG TIN ĐĂNG KÝ</h3>
+                </div>
+            </div>
+
+            <div class="row mt-2 w-100">
+                <div class="col-lg-4">
+                    <label class="text-mg">Hệ đào tạo xét tuyển<span class="text-danger">(*)</span></label>
+                </div>
+                <div class="col-lg-8">
+                    <select class="btn text-left form-control" name="txthdt" ng-model="hedaotao" style="border:1px solid #ccc" required>
+                        <option value="" disabled selected>Chọn hệ đào tạo</option>
+                        <option ng-repeat="x in daotao" value="{{x}}">{{x}}</option>
+                    </select>
+                    <div ng-hide="myForm.txthdt.$valid" style="color: red;">Vui lòng chọn hệ đào tạo</div>
+                </div>
+            </div>
+
+            <div class="row mt-2 w-100">
+                <div class="col-lg-4">
+                    <label class="text-mg">Hình thức học<span class="text-danger">(*)</span></label>
+                </div>
+                <div class="col-lg-8">
+                    <select class="btn text-left form-control" name="txthth" ng-model="hinhthuchoc" style="border:1px solid #ccc" required>
+                        <option value="" disabled selected>Chọn hình thức</option>
+                        <option ng-repeat="x in hinhthuc" value="{{x}}">{{x}}</option>
+                    </select>
+                    <div ng-hide="myForm.txthth.$valid" style="color: red;">Vui lòng chọn hình thức học</div>
+                </div>
+            </div>
+
+            <div class="row mt-2 w-100">
+                <div class="col-lg-4">
+                    <label class="text-mg">Ngành đăng ký xét tuyển<span class="text-danger">(*)</span></label>
+                </div>
+                <div class="col-lg-8">
+                    <input type="text" ng-model="nganhdangky" name="txtndk" class="form-control" placeholder="Ngành đăng ký" required>
+                    <div ng-hide="myForm.txtndk.$valid" style="color: red;">Vui lòng nhập ngành đăng ký</div>
+                </div>
+            </div>
+
+            <div class="row mt-2 w-100">
+                <div class="col-lg-4">
+                    <label class="text-mg">Điều kiện xét tuyển<span class="text-danger">(*)</span></label>
+                </div>
+                <div class="col-lg-8">
+                    <input type="text" ng-model="dieukienxettuyen" name="txthocvan" class="form-control" placeholder="Học vấn" required> 
+                    <div ng-hide="myForm.txthocvan.$valid" style="color: red;">Vui lòng nhập học vấn</div>
+                </div>
+            </div>
+
+            <div class="row mb-2 mt-2 w-100">
+                <div class="col-lg-4">
+                    <label class="text-mg">Ghi chú</label>
+                </div>
+                <div class="col-lg-8">
+                    <textarea class="form-control" ng-model="ghichu" rows="3"></textarea>
+                </div>
+            </div>
+
+            <b class="mt-">Lưu ý: thí sinh ghi đầy đủ những mục có <span style="color: red;">(*)</span></b>
+
+            <div class="row mt-2 bg-do w-100">
+                <div class="col-lg-12 text-center pt-1 pb-1">
+                    <h3 class="text-light text-mg">THÔNG TIN KHẢO SÁT</h3>
+                </div>
+            </div>
+
+                <p>Bạn biết ITC thông qua các kênh nào sao đây? (Có thể click chọn nhiều kênh)</p>
+
+            <div class="row mt-0 pt-0 w-100">
+                <div class="col-lg-3">
+                    <div class="form-check">
+                        <input class="form-check-input" ng-model="web" type="checkbox" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Website ITC</label>
+                      </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-check">
+                        <input class="form-check-input" ng-model="fb" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Facebook</label>
+                      </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-check">
+                        <input class="form-check-input" ng-model="ngt" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Người giới thiệu</label>
+                      </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-check">
+                        <input class="form-check-input" ng-model="tkgg" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Tìm kiếm trên google</label>
+                      </div>
+                </div>
+            </div>
+            <div class="row mb-4 w-100">
+                <div class="col-lg-3">
+                    <div class="form-check">
+                        <input class="form-check-input" ng-model="tv" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Tư vấn dưới cờ</label>
+                      </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-check">
+                        <input class="form-check-input" ng-model="cn" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Cẩm nang hướng nghiệp</label>
+                      </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-check">
+                        <input class="form-check-input" ng-model="tr" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Tờ rơi</label>
+                      </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-check">
+                        <input class="form-check-input" ng-model="tt" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Tin tức trên báo mạng</label>
+                      </div>
+                </div>
+            </div>
+            <div class="text-center" ng-show="myForm.$valid"><input ng-model="ticker" class="btn" type="checkbox" name="" id=""><span>Tôi xin cam đoan những lời khai của tôi trên đăng ký online là đúng sự thật. Nếu sai tôi hoàn toàn chịu trách nhiệm và bị xử lý theo Quy chế tuyển sinh hiện hành.</span></div>
+            <div class="row mt-4 w-100 justify-content-center">
+                <button type="button" ng-click="dangky()" class="btn btn-primary">Đăng ký ngay</button>
+            </div>
+        </form>
+        <script>
+            var app = angular.module('myApp', []);
+            app.controller('myCtrl', function($scope){
+                $scope.tinh = ["Tiền Giang", "Hồ Chí Minh", "Hà Nội"];
+
+                $scope.chonhuyen = function(){
+                    if($scope.tinhthanh == "Hà Nội"){
+                        $scope.quanhuyen = ["Đống Đa", "Cầu Giấy"]
+                    }
+                    else if($scope.tinhthanh == "Tiền Giang"){
+                        $scope.quanhuyen = ["Cái Bè", "Cai Lậy"];
+                    }
+                    else if($scope.tinhthanh == "Hồ Chí Minh"){
+                        $scope.quanhuyen = ["Tân Phú", "Tân Bình"];
+                    }
+                    else{
+                        $scope.quanhuyen = [];
+                    }
+                }
+
+                $scope.chonxa = function(){
+                    if($scope.huyen == "Cái Bè"){
+                        $scope.phuongxa = ["Mỹ Hội", "Mỹ Trung"]
+                    }
+                    else if($scope.huyen == "Cai Lậy"){
+                        $scope.phuongxa = ["Mỹ Thành Nam", "Bình Phú"];
+                    }
+                    else if($scope.huyen == "Tân Phú"){
+                        $scope.phuongxa = ["Tân Thành", "Hòa Thạnh"];
+                    }
+                    else if($scope.huyen == "Tân Bình"){
+                        $scope.phuongxa = ["Phường 1", "Phường 2"];
+                    }
+                    else if($scope.huyen == "Đống Đa"){
+                        $scope.phuongxa = ["Kim Liên", "Nam Đồng"];
+                    }
+                    else if($scope.huyen == "Cầu Giấy"){
+                        $scope.phuongxa = ["Nghĩa Đô", "Nghĩa Tân"];
+                    }
+                    else{
+                        $scope.phuongxa = [];
+                    }
+                }
+
+                $scope.daotao = ["Cao đẳng", "Liên thông Cao đẳng", "Ngắn hạn", "Trung cấp"]
+                $scope.hinhthuc = ["Sáng", "Tối"]
+
+                $scope.dangky = function() {
+                    if($scope.myForm.$valid == false){
+                        alert("Vui lòng nhập dữ liệu")
+                    }
+                    else if($scope.ticker == true){
+                        if($scope.ghichu == undefined){
+                            alert("Đăng ký thành công")
+                            alert(
+                            "Họ đệm: " + $scope.hodem +
+                            "\nTên: "+ $scope.ten +
+                            "\nGiới tính: "+ $scope.gioitinh +
+                            "\nNgày Sinh: "+ $scope.ngaysinh +
+                            "\nNơi Sinh: "+ $scope.noisinh +
+                            "\nSố CMND/CCCD: "+ $scope.cmt + 
+                            "\nNgày Cấp: "+ $scope.ngaycap +
+                            "\nNơi Cấp: "+ $scope.noicap +
+                            "\nEmail: "+ $scope.email +
+                            "\nTỉnh/thành phố: "+ $scope.tinhthanh +
+                            "\nQuận/huyện: "+ $scope.huyen +
+                            "\nPhường/xã: "+ $scope.xa +
+                            "\nĐịa chỉ: "+ $scope.diachi +
+                            "\nSố điện thoại: "+ $scope.sdt +
+                            "\nHề đào tạo: "+ $scope.hedaotao +
+                            "\nHình thức học: "+ $scope.hinhthuchoc +
+                            "\nNgành đăng kí xét tuyển: "+ $scope.nganhdangky +
+                            "\nĐiều kiện xét tuyển: "+ $scope.dieukienxettuyen +
+                            "\nGhi chú: "+ "Không có"
+                            );
+                            alert(
+                                "\nWebsite ITC: "+ $scope.web +
+                                "\nFacebook: "+$scope.fb +
+                                "\nNgười giới thiệu: "+$scope.ngt +
+                                "\nTìm kiếm google: "+ $scope.tkgg +
+                                "\nTư Vấn: "+$scope.tv +
+                                "\nCẩm năng: "+$scope.cn +
+                                "\nTờ rơi: "+ $scope.tr +
+                                "\nTin tức: "+$scope.tt
+                            );
+                         }
+                         else{
+                            alert("Đăng ký thành công")
+                            alert(
+                            "Họ đệm: " + $scope.hodem +
+                            "\nTên: "+ $scope.ten +
+                            "\nGiới tính: "+ $scope.gioitinh +
+                            "\nNgày Sinh: "+ $scope.ngaysinh +
+                            "\nNơi Sinh: "+ $scope.noisinh +
+                            "\nSố CMND/CCCD: "+ $scope.cmt + 
+                            "\nNgày Cấp: "+ $scope.ngaycap +
+                            "\nNơi Cấp: "+ $scope.noicap +
+                            "\nEmail: "+ $scope.email +
+                            "\nTỉnh/thành phố: "+ $scope.tinhthanh +
+                            "\nQuận/huyện: "+ $scope.huyen +
+                            "\nPhường/xã: "+ $scope.xa +
+                            "\nĐịa chỉ: "+ $scope.diachi +
+                            "\nSố điện thoại: "+ $scope.sdt +
+                            "\nHề đào tạo: "+ $scope.hedaotao +
+                            "\nHình thức học: "+ $scope.hinhthuchoc +
+                            "\nNgành đăng kí xét tuyển: "+ $scope.nganhdangky +
+                            "\nĐiều kiện xét tuyển: "+ $scope.dieukienxettuyen +
+                            "\nGhi chú: "+ $scope.ghichu
+                            );
+                            alert(
+                                "\nWebsite ITC: "+ $scope.web +
+                                "\nFacebook: "+$scope.fb +
+                                "\nNgười giới thiệu: "+$scope.ngt +
+                                "\nTìm kiếm google: "+ $scope.tkgg +
+                                "\nTư Vấn: "+$scope.tv +
+                                "\nCẩm năng: "+$scope.cn +
+                                "\nTờ rơi: "+ $scope.tr +
+                                "\nTin tức: "+$scope.tt
+                            );
+                         }
+                    }
+                    else {
+                        alert("Đăng kí không thành công \nVui lòng tích vào ô cam kết và thử lại")
+                    }
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
